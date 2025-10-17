@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruas Seguras Brasil - Combatendo a Violência</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            min-height: 100%;
+        }
+        
+        html {
+            height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1a202c;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a202c;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #e53e3e;
+        }
+
+        .emergency-btn {
+            background: #e53e3e;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .emergency-btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #e53e3e;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #1a202c;
+        }
+
+        .features {
+            background: white;
+            padding: 4rem 0;
+            margin: 2rem 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 15px;
+            background: #f7fafc;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #e53e3e;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: white;
+            padding: 3rem 0;
+            margin: 2rem 0;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #e53e3e;
+        }
+
+        .report-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            display: none;
+            border: 3px solid #1a202c;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #1a202c;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #e53e3e;
+        }
+
+        .safety-tips {
+            background: #fff5f5;
+            border-left: 4px solid #e53e3e;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #fed7d7;
+        }
+
+        .tips-list li:before {
+            content: "⚠️";
+            margin-right: 10px;
+        }
+
+        footer {
+            background: #1a202c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 32, 44, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 3px solid #1a202c;
+        }
+
+        .close-modal {
+            background: #1a202c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #2d3748;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                🛡️ Ruas Seguras Brasil
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#denunciar">Denunciar</a></li>
+                <li><a href="#prevencao">Prevenção</a></li>
+                <li><a href="#estatisticas">Estatísticas</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <a href="#" class="emergency-btn" onclick="showEmergencyModal()">🚨 EMERGÊNCIA 190</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <div class="container">
+                <h1>Juntos Contra a Violência</h1>
+                <p>Uma plataforma colaborativa para tornar as ruas do Brasil mais seguras através de denúncias anônimas, prevenção e conscientização.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="showReportForm()">📱 Fazer Denúncia</a>
+                    <a href="#prevencao" class="btn btn-secondary">🛡️ Dicas de Segurança</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="recursos">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a202c; margin-bottom: 1rem;">Como Funciona</h2>
+                <p style="text-align: center; color: #718096; margin-bottom: 2rem;">Ferramentas para combater a criminalidade de forma segura e eficaz</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3 style="color: #1a202c;">Denúncia Anônima</h3>
+                        <p>Reporte crimes e situações suspeitas de forma completamente anônima e segura.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🗺️</div>
+                        <h3 style="color: #1a202c;">Mapa de Ocorrências</h3>
+                        <p>Visualize áreas de risco em tempo real e planeje rotas mais seguras.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚨</div>
+                        <h3 style="color: #1a202c;">Botão de Pânico</h3>
+                        <p>Acesso rápido às autoridades em situações de emergência.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h3 style="color: #1a202c;">Rede Comunitária</h3>
+                        <p>Conecte-se com vizinhos e organize ações de segurança local.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3 style="color: #1a202c;">Estatísticas</h3>
+                        <p>Dados atualizados sobre criminalidade para tomada de decisões.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎓</div>
+                        <h3 style="color: #1a202c;">Educação</h3>
+                        <p>Conteúdo educativo sobre prevenção e direitos do cidadão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats" id="estatisticas">
+            <div class="container">
+                <h2>Impacto em Números</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>15.847</h3>
+                        <p>Denúncias Recebidas</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2.341</h3>
+                        <p>Casos Resolvidos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>89%</h3>
+                        <p>Taxa de Satisfação</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>156</h3>
+                        <p>Cidades Atendidas</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="report-form" id="reportForm">
+            <div class="container">
+                <h2 style="text-align: center; color: #1a202c; margin-bottom: 2rem;">📱 Fazer Denúncia Anônima</h2>
+                <form onsubmit="submitReport(event)">
+                    <div class="form-group">
+                        <label for="crime-type">Tipo de Ocorrência</label>
+                        <select id="crime-type" required>
+                            <option value="">Selecione o tipo</option>
+                            <option value="roubo">Roubo</option>
+                            <option value="furto">Furto</option>
+                            <option value="agressao">Agressão</option>
+                            <option value="trafico">Tráfico de Drogas</option>
+                            <option value="vandalismo">Vandalismo</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Local da Ocorrência</label>
+                        <input type="text" id="location" placeholder="Rua, bairro, cidade" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date-time">Data e Hora</label>
+                        <input type="datetime-local" id="date-time" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Descrição da Ocorrência</label>
+                        <textarea id="description" rows="5" placeholder="Descreva o que aconteceu..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="suspects">Descrição dos Suspeitos (opcional)</label>
+                        <textarea id="suspects" rows="3" placeholder="Características físicas, vestimentas, etc."></textarea>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">📤 Enviar Denúncia</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideReportForm()" style="margin-left: 1rem;">❌ Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <section class="safety-tips" id="prevencao">
+            <div class="container">
+                <h2 style="color: #e53e3e; margin-bottom: 1rem;">🛡️ Dicas de Segurança Pessoal</h2>
+                <ul class="tips-list">
+                    <li>Evite exibir objetos de valor em locais públicos</li>
+                    <li>Mantenha-se atento ao ambiente ao seu redor</li>
+                    <li>Prefira locais bem iluminados e movimentados</li>
+                    <li>Compartilhe sua localização com pessoas de confiança</li>
+                    <li>Tenha sempre os números de emergência salvos</li>
+                    <li>Confie em seus instintos - se algo parecer errado, saia do local</li>
+                    <li>Evite usar fones de ouvido em locais isolados</li>
+                    <li>Mantenha documentos e dinheiro em locais separados</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contato">
+        <div class="container">
+            <p>&copy; 2024 Ruas Seguras Brasil. Todos os direitos reservados.</p>
+            <p>📞 Central de Atendimento: 0800-123-4567 | 📧 contato@ruasseguras.gov.br</p>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 1rem;">
+                Em caso de emergência, ligue imediatamente para 190 (Polícia Militar) ou 193 (Bombeiros)
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal de Emergência -->
+    <div class="modal" id="emergencyModal">
+        <div class="modal-content">
+            <h2 style="color: #e53e3e;">🚨 EMERGÊNCIA</h2>
+            <p><strong>Ligue imediatamente:</strong></p>
+            <p style="font-size: 1.5rem; margin: 1rem 0;">
+                📞 <strong>190</strong> - Polícia Militar<br>
+                📞 <strong>193</strong> - Bombeiros<br>
+                📞 <strong>192</strong> - SAMU
+            </p>
+            <p style="color: #718096; font-size: 0.9rem;">
+                Se não puder falar, envie SMS para 190 com sua localização
+            </p>
+            <button class="close-modal" onclick="hideEmergencyModal()">Fechar</button>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h2 style="color: #e53e3e;">✅ Denúncia Enviada</h2>
+            <p>Sua denúncia foi recebida com sucesso!</p>
+            <p><strong>Protocolo:</strong> <span id="protocol-number"></span></p>
+            <p style="color: #718096; font-size: 0.9rem;">
+                Guarde este número para acompanhar o andamento. Suas informações são mantidas em total sigilo.
+            </p>
+            <button class="close-modal" onclick="hideConfirmModal()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        function showReportForm() {
+            document.getElementById('reportForm').style.display = 'block';
+            document.getElementById('reportForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideReportForm() {
+            document.getElementById('reportForm').style.display = 'none';
+        }
+
+        function showEmergencyModal() {
+            document.getElementById('emergencyModal').style.display = 'flex';
+        }
+
+        function hideEmergencyModal() {
+            document.getElementById('emergencyModal').style.display = 'none';
+        }
+
+        function showConfirmModal() {
+            const protocolNumber = 'RS' + Date.now().toString().slice(-8);
+            document.getElementById('protocol-number').textContent = protocolNumber;
+            document.getElementById('confirmModal').style.display = 'flex';
+        }
+
+        function hideConfirmModal() {
+            document.getElementById('confirmModal').style.display = 'none';
+            hideReportForm();
+        }
+
+        function submitReport(event) {
+            event.preventDefault();
+            
+            // Simular envio da denúncia
+            const formData = new FormData(event.target);
+            
+            // Resetar formulário
+            event.target.reset();
+            
+            // Mostrar confirmação
+            showConfirmModal();
+        }
+
+        // Smooth scrolling para links de navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fechar modais clicando fora
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ff3a7f3746543f',t:'MTc2MDY5ODE1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
